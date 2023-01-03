@@ -16,6 +16,8 @@ module.exports = {
   output: {
     path: path.join(__dirname, '/dist'),
     filename: 'bundle.js',
+    assetModuleFilename: 'images/[hash][ext][query]',
+    clean: true,
   },
   devtool: 'source-map',
 
@@ -28,6 +30,14 @@ module.exports = {
 
   module: {
     rules: [
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: 'asset/resource',
+      },
       {
         test: /\.(s[ac]|c)ss$/i,
         use: [

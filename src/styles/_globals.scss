@@ -1,0 +1,16 @@
+@use 'variables';
+
+body {
+  margin: 0 auto;
+  color: var(--text);
+  background-color: variables.$bg;
+  border: 4px solid black;
+  text-align: center;
+  //font-style: italic;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
