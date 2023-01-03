@@ -8,6 +8,9 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
+    ecmaFeatures: {
+      jsx: true,
+    },
   },
   plugins: ['react', 'unused-imports', 'import', 'prettier'],
   rules: {
@@ -32,5 +35,10 @@ module.exports = {
         'newlines-between': 'always-and-inside-groups',
       },
     ],
+  },
+  settings: {
+    react: {
+      version: 'detect',
+    },
   },
 };
