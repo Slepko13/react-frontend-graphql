@@ -52,6 +52,6 @@
   },
   "lint-staged": {
     "*": "prettier --write --ignore-unknown ./src",
-    "*.(ts|js)": "eslint --fix ./src"
+    "*.(ts|js|jsx|tsx)": "eslint --fix ./src"
   }
 }
