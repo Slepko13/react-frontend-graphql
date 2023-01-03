@@ -29,6 +29,7 @@ module.exports = {
           'object',
           'type',
         ],
+        'newlines-between': 'always-and-inside-groups',
       },
     ],
   },
