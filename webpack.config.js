@@ -14,7 +14,7 @@ module.exports = {
   entry: './src/index.js',
 
   output: {
-    path: path.join(__dirname, '/dist'),
+    path: path.join(__dirname, '/build'),
     filename: 'bundle.js',
     assetModuleFilename: 'images/[hash][ext][query]',
     clean: true,
@@ -23,7 +23,7 @@ module.exports = {
 
   plugins: [
     new HTMLWebpackPlugin({
-      template: './src/index.html',
+      template: './public/index.html',
     }),
     new MiniCssExtractPlugin(),
   ],
@@ -70,6 +70,7 @@ module.exports = {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
   devServer: {
+    port: 3000,
     hot: true,
   },
 };
