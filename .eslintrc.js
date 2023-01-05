@@ -19,6 +19,7 @@ module.exports = {
     'no-unused-vars': 'warn',
     'arrow-body-style': 'off',
     'prefer-arrow-callback': 'off',
+    'react/prop-types': 'warn',
     'import/order': [
       'error',
       {
