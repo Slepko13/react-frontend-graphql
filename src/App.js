@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 
-import withRouter from './hooks/withRouter';
 import Layout from './components/Layout/Layout';
 import Backdrop from './components/Backdrop/Backdrop';
 import Toolbar from './components/Toolbar/Toolbar';
@@ -141,10 +140,10 @@ class App extends Component {
 
   render() {
     let routes = (
-      <Routes>
+      <Switch>
         <Route
           path="/"
-          exact="true"
+          exact
           render={(props) => (
             <LoginPage
               {...props}
@@ -155,7 +154,7 @@ class App extends Component {
         />
         <Route
           path="/signup"
-          exact="true"
+          exact
           render={(props) => (
             <SignupPage
               {...props}
@@ -164,15 +163,15 @@ class App extends Component {
             />
           )}
         />
-        <Route render={() => <Navigate to="/" />} />
-      </Routes>
+        <Redirect to="/" />
+      </Switch>
     );
     if (this.state.isAuth) {
       routes = (
-        <Routes>
+        <Switch>
           <Route
             path="/"
-            exact="true"
+            exact
             render={(props) => (
               <FeedPage userId={this.state.userId} token={this.state.token} />
             )}
@@ -187,8 +186,8 @@ class App extends Component {
               />
             )}
           />
-          <Route render={() => <Navigate to="/" />} />
-        </Routes>
+          <Redirect to="/" />
+        </Switch>
       );
     }
     return (
