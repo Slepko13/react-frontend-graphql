@@ -62,6 +62,7 @@ class Feed extends Component {
             title
             content
             createdAt
+            imageUrl
             creator {
               name
               }
@@ -145,16 +146,25 @@ class Feed extends Component {
     this.setState({ isEditing: false, editPost: null });
   };
 
-  finishEditHandler = (postData) => {
+  finishEditHandler = async (postData) => {
     const { title, content, image } = postData;
     this.setState({
       editLoading: true,
     });
     const formData = new FormData();
-    formData.append('title', title);
-    formData.append('content', content);
     formData.append('image', image);
+    if (this.state.editPost) {
+      formData.append('oldPath', this.state.editPost.imagePath);
+    }
     console.log('image', formData.get('image'));
+    const resData = await fetch('http://localhost:8080/post-image', {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${this.props.token}`,
+      },
+      body: formData,
+    }).then((res) => res.json());
+    const imageUrl = resData.filePath;
 
     const graphqlQuery = {
       query: `
@@ -162,7 +172,7 @@ class Feed extends Component {
         createPost(postInput:{
           title: "${title}",
           content:"${content}", 
-          imageUrl: "${image}"}) {
+          imageUrl: "${imageUrl}"}) {
           _id
           title
           content
@@ -204,6 +214,7 @@ class Feed extends Component {
           content: createPost.content,
           creator: createPost.creator,
           createdAt: createPost.createdAt,
+          imagePath: createPost.imageUrl,
         };
         this.setState((prevState) => {
           const posts = [...prevState.posts];
